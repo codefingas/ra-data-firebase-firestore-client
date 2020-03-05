@@ -31,10 +31,7 @@
   },
   "author": "Rafal Zawadzki <iam@rafalzawadzki.com> (http://rafalzawadzki.com/)",
   "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rafalzawadzki/ra-data-firestore-client.git"
-  },
+  "repository": "https://github.com/rafalzawadzki/ra-data-firestore-client.git",
   "peerDependencies": {
     "react": "16.9.0",
     "react-dom": "16.9.0"
