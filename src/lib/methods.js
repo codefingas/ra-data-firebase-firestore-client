@@ -94,27 +94,57 @@ const save = async (
   firebaseSaveFilter,
   uploadResults,
   isNew,
-  timestampFieldNames
+  timestampFieldNames,
+  Bucket
 ) => {
+  let file = Object.keys(data).reduce((acc, property) => {
+    let item = data[property];
+    if (typeof item === 'object' && item.rawFile) {
+      firebase.app().storage(`gs://${Bucket}`);
+      let metadata = {
+        contentType: `${item.type}`
+      };
+      uploadTask = firebase
+        .app()
+        .storage(`gs://${Bucket}`)
+        .child()
+        .put(item, metadata);
+
+      uploadTask.then(() => {
+        uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+          acc[property] = downloadURL;
+          delete data[property];
+          return acc;
+        });
+      });
+    }
+
+    if (!acc[property]) {
+      acc[property] = data[property];
+    }
+
+    return acc;
+  }, {});
+
   if (uploadResults) {
-    uploadResults.map(uploadResult => (uploadResult ? Object.assign(data, uploadResult) : false));
+    uploadResults.map(uploadResult => (uploadResult ? (file = { ...data, ...uploadResult }) : false));
   }
 
   if (isNew) {
-    Object.assign(data, { [timestampFieldNames.createdAt]: new Date() });
+    file = { file, [timestampFieldNames.createdAt]: new Date() };
   }
 
-  data = Object.assign(previous, { [timestampFieldNames.updatedAt]: new Date() }, data);
+  file = { previous, [timestampFieldNames.updatedAt]: new Date(), file };
 
   if (!data.id) {
-    data.id = id;
+    file.id = id;
   }
 
   await firebase
     .firestore()
-    .doc(`${resourcePath}/${data.id}`)
-    .set(firebaseSaveFilter(data));
-  return { data };
+    .doc(`${resourcePath}/${file.id}`)
+    .set(firebaseSaveFilter(file));
+  return { file };
 };
 
 const del = async (id, resourceName, resourcePath, uploadFields) => {

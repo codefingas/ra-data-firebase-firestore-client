@@ -129,7 +129,8 @@ const RestProvider = (firebaseConfig = {}, options = {}) => {
           firebaseSaveFilter,
           uploadResults,
           type === CREATE,
-          timestampFieldNames
+          timestampFieldNames,
+          firebaseConfig.storageBucket
         );
         return result;
 
