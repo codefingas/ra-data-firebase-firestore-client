@@ -111,7 +111,7 @@ const save = async (
         .put(item, metadata);
 
       uploadTask.then(() => {
-        uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+        uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
           acc[property] = downloadURL;
           delete data[property];
           return acc;

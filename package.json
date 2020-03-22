@@ -27,7 +27,7 @@
     "demo": "node scripts/start.js",
     "init": "npm run build && npm link && npm link ra-data-firestore-client",
     "reset": "rm -rf node_modules && rm -rf package-lock.json && npm install && npm run init",
-    "start": "concurrently --kill-others \"npm run build:watch\" \"npm run app-start\""
+    "start": "concurrently --kill-others \"npm run build:watch\" \"npm run demo\""
   },
   "author": "Rafal Zawadzki <iam@rafalzawadzki.com> (http://rafalzawadzki.com/)",
   "license": "ISC",

@@ -6,12 +6,12 @@ import { PostList, PostEdit, PostCreate } from './Posts';
 import { UserList, UserEdit, UserCreate } from './Users';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyASpb1daoPZdpzY_-d1mkzgO-sxoBw6i9o',
-  authDomain: 'react-admin-firestore-client.firebaseapp.com',
-  databaseURL: 'https://react-admin-firestore-client.firebaseio.com',
-  projectId: 'react-admin-firestore-client',
-  storageBucket: '',
-  messagingSenderId: '796768771332'
+  apiKey: 'AIzaSyBJcWOYJUP_Mc6uMQsDU8sevreL35MmYH0',
+  authDomain: 'm-staging-13779.firebaseapp.com',
+  databaseURL: 'https://m-staging-13779.firebaseio.com',
+  projectId: 'm-staging-13779',
+  storageBucket: 'm-staging-13779.appspot.com',
+  messagingSenderId: '203484472632'
 };
 
 const trackedResources = [{ name: 'posts' }, { name: 'users' }];
